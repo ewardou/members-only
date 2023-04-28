@@ -5,17 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign up</title>
+    <script src="/javascripts/checkPasswords.js" defer></script>
 </head>
 <body>
     <h1>Sign up</h1>
     <form action="" method="post">
         <p>
             <label for="firstName">First name</label>
-            <input type="text" id="firstName" name="firstName" required>
+            <input type="text" id="firstName" name="firstName" value="<%= user ? user.firstName : "" %>" required>
         </p>
         <p>
             <label for="lastName">Last name</label>
-            <input type="text" id="lastName" name="lastName" required>
+            <input type="text" id="lastName" name="lastName" value="<%= user ? user.lastName : "" %>" required>
         </p>
         <p>
             <label for="email">Email</label>
@@ -29,6 +30,11 @@
             <label for="pwdConfirm">Password</label>
             <input type="password" name="pwdConfirm" id="pwdConfirm" required minlength="8">
         </p>
+        <div class="errors">
+            <% if (errors) { errors.forEach(error => {%>
+                <p><%= error.msg %></p>
+            <% })} %>
+        </div>
         <button>Sign up</button>
     </form>
 </body>
