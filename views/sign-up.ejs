@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+</head>
+<body>
+    <h1>Sign up</h1>
+    <form action="" method="post">
+        <p>
+            <label for="firstName">First name</label>
+            <input type="text" id="firstName" name="firstName" required>
+        </p>
+        <p>
+            <label for="lastName">Last name</label>
+            <input type="text" id="lastName" name="lastName" required>
+        </p>
+        <p>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" required>
+        </p>
+        <p>
+            <label for="pwd">Password</label>
+            <input type="password" name="pwd" id="pwd" required minlength="8">
+        </p>
+        <p>
+            <label for="pwdConfirm">Password</label>
+            <input type="password" name="pwdConfirm" id="pwdConfirm" required minlength="8">
+        </p>
+        <button>Sign up</button>
+    </form>
+</body>
+</html>
