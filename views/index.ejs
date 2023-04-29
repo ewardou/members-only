@@ -1,11 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>Members only</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <% if (user) {%>
+      <h1>Welcome <%= user.fullName %></h1>
+      <a href="/log-out">Log out</a>
+    <% } else { %>
+      <h1>Please log in</h1>
+      <form action="/log-in" method="post">
+        <p>
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" autocomplete="email">
+        </p>
+        <p>
+          <label for="pwd">Password</label>
+          <input type="password" name="pwd" id="pwd">
+        </p>
+        <% if (error) {%>
+          <p><%= error.at(-1) %></p>
+        <% } %>
+        <button>Log in</button>
+      </form>
+      <p>Or <a href="/sign-up">sign up</a></p>
+    <% } %>
   </body>
 </html>

@@ -1,4 +1,8 @@
 const express = require('express');
+const path = require('path');
+const session = require('express-session');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler');
@@ -6,13 +10,69 @@ const User = require('../models/users');
 const Message = require('../models/messages');
 
 const router = express.Router();
+require('dotenv').config();
+
+passport.use(
+    new LocalStrategy(
+        { usernameField: 'email', passwordField: 'pwd' },
+        async (username, password, done) => {
+            try {
+                const user = await User.findOne({ email: username });
+                if (!user) {
+                    return done(null, false, { message: 'Incorrect email' });
+                }
+                bcrypt.compare(password, user.password, (err, res) => {
+                    if (res) {
+                        return done(null, user);
+                    }
+                    return done(null, false, { message: 'Incorrect password' });
+                });
+            } catch (err) {
+                return done(err);
+            }
+        }
+    )
+);
+
+passport.serializeUser((user, done) => {
+    done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+    try {
+        const user = await User.findById(id);
+        done(null, user);
+    } catch (err) {
+        done(err);
+    }
+});
+
+router.use(
+    session({
+        secret: process.env.SECRET,
+        resave: false,
+        saveUninitialized: true,
+    })
+);
+router.use(passport.initialize());
+router.use(passport.session());
 
 router.get('/', (req, res, next) => {
-    res.render('index', { title: 'Express' });
+    console.log(req.session);
+    res.render('index', { error: req.session.messages, user: req.user });
 });
 
 router.get('/sign-up', (req, res) => {
     res.render('sign-up', { user: null, errors: null });
+});
+
+router.get('/log-out', (req, res, next) => {
+    req.logout((err) => {
+        if (err) {
+            return next(err);
+        }
+        res.redirect('/');
+    });
 });
 
 router.post('/sign-up', [
@@ -66,5 +126,14 @@ router.post('/sign-up', [
         );
     },
 ]);
+
+router.post(
+    '/log-in',
+    passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/',
+        failureMessage: true,
+    })
+);
 
 module.exports = router;
