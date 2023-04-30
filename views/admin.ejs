@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <script src="/javascripts/checkPasscode.js" defer></script>
+</head>
+<body>
+    <% if (isAdmin) {%>
+        <h1>You're already an admin</h1>
+    <% } else {%>
+        <h1> Become an admin by entering the secret passcode. You will gain the power to delete messages.</h1>
+        <form action="" method="post">
+            <label for="passcode">Passcode</label>
+            <input type="password" name="passcode" id="passcode" required>
+            <p class="errors"></p>
+            <button>Upgrade</button>
+        </form>
+    <% } %>
+</body>
+</html>

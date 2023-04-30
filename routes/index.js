@@ -95,6 +95,28 @@ router.post(
     })
 );
 
+router.get('/admin', checkAuthentication, (req, res) => {
+    res.render('admin', { isAdmin: req.user.isAdmin });
+});
+
+router.post(
+    '/admin',
+    asyncHandler(async (req, res) => {
+        await User.findByIdAndUpdate(req.user._id, { $set: { isAdmin: true } });
+        res.redirect('/');
+    })
+);
+
+router.post(
+    '/delete/:id',
+    asyncHandler(async (req, res) => {
+        if (req.user.isAdmin) {
+            await Message.findByIdAndRemove(req.params.id);
+        }
+        res.redirect('/');
+    })
+);
+
 router.get('/new-message', checkAuthentication, (req, res) => {
     res.render('new-message');
 });
