@@ -10,6 +10,20 @@
       <a href="/new-message">Create new message</a>
       <a href="/join-club">Join the club</a>
       <a href="/log-out">Log out</a>
+      <div class="messages">
+        <% if (messages) { messages.forEach(msg => {%>
+          <div>
+            <% if (user.isMember) {%>
+              <p><%= msg.author.fullName %></p>
+            <% } %>
+            <p><%= msg.title %></p>
+            <p><%= msg.text %></p>
+            <% if (user.isMember) {%>
+              <p><%= msg.timestamp %></p>
+            <% } %>
+          </div>
+        <% })} %>
+      </div>
     <% } else { %>
       <h1>Please log in</h1>
       <form action="/log-in" method="post">

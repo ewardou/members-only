@@ -65,10 +65,17 @@ router.use(
 router.use(passport.initialize());
 router.use(passport.session());
 
-router.get('/', (req, res, next) => {
-    console.log(req.session);
-    res.render('index', { error: req.session.messages, user: req.user });
-});
+router.get(
+    '/',
+    asyncHandler(async (req, res, next) => {
+        const messages = await Message.find().populate('author');
+        res.render('index', {
+            error: req.session.messages,
+            user: req.user,
+            messages,
+        });
+    })
+);
 
 router.get('/sign-up', (req, res) => {
     res.render('sign-up', { user: null, errors: null });
