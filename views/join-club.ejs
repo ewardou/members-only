@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the club</title>
+    <script src="/javascripts/checkPasscode.js" defer></script>
+</head>
+<body>
+    <% if (isMember) {%>
+        <h1>You're already a member</h1>
+    <% } else {%>
+        <h1> Upgrade your membership status by entering the secret passcode, and get access to see who the authors of the messages are.</h1>
+        <form action="" method="post">
+            <label for="passcode">Passcode</label>
+            <input type="password" name="passcode" id="passcode" required>
+            <p class="errors"></p>
+            <button>Upgrade</button>
+        </form>
+    <% } %>
+</body>
+</html>

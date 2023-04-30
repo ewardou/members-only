@@ -12,6 +12,14 @@ const Message = require('../models/messages');
 const router = express.Router();
 require('dotenv').config();
 
+function checkAuthentication(req, res, next) {
+    if (req.isAuthenticated()) {
+        next();
+    } else {
+        res.redirect('/');
+    }
+}
+
 passport.use(
     new LocalStrategy(
         { usernameField: 'email', passwordField: 'pwd' },
@@ -65,6 +73,20 @@ router.get('/', (req, res, next) => {
 router.get('/sign-up', (req, res) => {
     res.render('sign-up', { user: null, errors: null });
 });
+
+router.get('/join-club', checkAuthentication, (req, res) => {
+    res.render('join-club', { isMember: req.user.isMember });
+});
+
+router.post(
+    '/join-club',
+    asyncHandler(async (req, res) => {
+        const user = await User.findById(req.user._id);
+        user.isMember = true;
+        await user.save();
+        res.redirect('/');
+    })
+);
 
 router.get('/log-out', (req, res, next) => {
     req.logout((err) => {
