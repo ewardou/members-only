@@ -88,6 +88,28 @@ router.post(
     })
 );
 
+router.get('/new-message', checkAuthentication, (req, res) => {
+    res.render('new-message');
+});
+
+router.post('/new-message', [
+    body('title').trim().notEmpty().escape(),
+    body('text').trim().notEmpty().escape(),
+    asyncHandler(async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty) {
+            return res.render('new-message');
+        }
+        const newMsg = new Message({
+            title: req.body.title,
+            text: req.body.text,
+            author: req.user._id,
+        });
+        await newMsg.save();
+        res.redirect('/');
+    }),
+]);
+
 router.get('/log-out', (req, res, next) => {
     req.logout((err) => {
         if (err) {
