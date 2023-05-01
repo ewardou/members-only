@@ -1,0 +1,3 @@
+This small project was made with Express for the backend, MongoDB for the database, and EJS as the template engine. It is a members' site where users can sign up and write messages, where each user has different abilities and permissions given they provide a passcode. The secret passcode is "mango". The main focus of doing this was to practice how to implement user authentication and sessions in a site when using passport.js with a local strategy (username-password).
+
+Live preview: https://members-only-nze1.onrender.com
