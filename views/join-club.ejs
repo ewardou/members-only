@@ -6,8 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join the club</title>
     <script src="/javascripts/checkPasscode.js" defer></script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/admin.css' />
 </head>
 <body>
+    <header>
+        <a href="/"><h1>Members Club</h1></a>
+    </header>
     <% if (isMember) {%>
         <h1>You're already a member</h1>
     <% } else {%>

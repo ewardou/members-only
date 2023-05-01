@@ -1,8 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Comme&display=swap');
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 30px;
+  font-family: 'Comme', sans-serif;
+  background-color: #333;
+  color: #ddd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-a {
-  color: #00B7FF;
+aside > div{
+  background-color: #eee;
+  color: #333;
+  padding: 15px;
+  border-radius: 5px;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+aside > div > form input{
+  display: block;
+}
+aside > div > h1{
+  margin: 0;
+  margin-top: 16px;
+}
+
+.messages > div {
+  padding-left: 5px;
+  border-left: 3px solid goldenrod;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.messages > div form {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+.delete{
+  cursor: pointer;
+  background-color: rgb(245, 70, 70);
+  border: none;
+}
+.timestamp{
+  font-size: 0.8rem;
+}
+
+a{
+  color: rgb(128, 93, 5);
+  font-size: 1rem;
+  text-decoration: none;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+header h1{
+  color:goldenrod
+}
+button{
+  font-weight: bold;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+@media (min-width: 650px) {
+  body{
+    flex-direction: row;
+    padding: 25px;
+    padding-top: 60px;
+  }
+  aside{
+    align-self: flex-start;
+    position: relative;
+    top: 20px;
+  }  
+  header{
+    position: absolute;
+    left: 20px;
+    top: 5px;
+  }
+  .messages{
+    flex: 1;
+    align-self:flex-start;
+    padding: 0px 20px;
+  }
 }

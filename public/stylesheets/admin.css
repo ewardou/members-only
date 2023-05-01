@@ -1,0 +1,15 @@
+body{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+input,textarea{
+    display: block;
+    margin: 0 auto;
+}
+h1{
+    margin-top: 40px;
+}
+header h1{
+    margin-top: 21px;
+}

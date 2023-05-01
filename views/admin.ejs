@@ -6,8 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
     <script src="/javascripts/checkPasscode.js" defer></script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/admin.css' />
 </head>
 <body>
+    <header>
+        <a href="/"><h1>Members Club</h1></a>
+    </header>
     <% if (isAdmin) {%>
         <h1>You're already an admin</h1>
     <% } else {%>
